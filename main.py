@@ -1,8 +1,13 @@
 class BankAccount:
-    # don't forget to add some default values for these parameters!
+    instances = []
     def __init__(self, int_rate, balance): 
         self.balance = balance
         self.int_rate = int_rate
+        BankAccount.instances.append(self)
+
+    @classmethod
+    def check_instances(cls):
+        print(cls.instances)
 
     def deposit(self, amount):
         self.balance += amount
@@ -31,3 +36,5 @@ account2 = BankAccount(.10, 200)
 
 account1.deposit(100).deposit(100).withdraw(100).yield_interest().display_account_info()
 account2.deposit(100).deposit(100).withdraw(100).withdraw(100).withdraw(100).withdraw(100).yield_interest().display_account_info()
+
+BankAccount.check_instances()
